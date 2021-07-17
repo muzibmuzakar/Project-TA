@@ -16,7 +16,9 @@ class PelajaranController extends Controller
     public function index()
     {
         $data = ['loggedUserInfo' =>Admin::where('id', '=', session('LoggedUser'))->first()];
-        return view('admin.pelajaran.pelajaran', $data);
+        $pelajaran = Pelajaran::latest()->paginate(5);
+
+        return view('admin.pelajaran.pelajaran', $data,['pelajaran' => $pelajaran]);
     }
 
     /**
@@ -27,6 +29,7 @@ class PelajaranController extends Controller
     public function create()
     {
         $data = ['loggedUserInfo' =>Admin::where('id', '=', session('LoggedUser'))->first()];
+
         return view('admin.pelajaran.addPelajaran', $data);
     }
 

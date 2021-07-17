@@ -101,26 +101,29 @@
         <div class="row center" style="margin-left: 20px">
 
             <!-- Earnings (Monthly) Card Example -->
+            @foreach ($pelajaran as $p)
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="a-box">
                     <div class="img-container">
                         <div class="img-inner">
                             <div class="inner-skew">
-                                <img src="html.png">
+                                <img src="{{ url('/image/'.$p->image) }}">
                             </div>
                         </div>
                     </div>
                     <div class="text-container">
-                        <h3>A blue bird</h3>
+                        <h3>{{ $p->name }}</h3>
                         <div>
-                            This a demo experiment to skew image container. It looks good.
+                            {{ $p->detail }}
                         </div>
                     </div>
                 </div>
             </div>
+                
+            @endforeach
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            {{-- <div class="col-xl-3 col-md-6 mb-4">
                 <div class="a-box">
                     <div class="img-container">
                         <div class="img-inner">
@@ -138,43 +141,6 @@
                 </div>
             </div>
 
-            <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="a-box">
-                    <div class="img-container">
-                        <div class="img-inner">
-                            <div class="inner-skew">
-                                <img src="html.png">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-container">
-                        <h3>A blue bird</h3>
-                        <div>
-                            This a demo experiment to skew image container. It looks good.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="a-box">
-                    <div class="img-container">
-                        <div class="img-inner">
-                            <div class="inner-skew">
-                                <img src="html.png">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-container">
-                        <h3>A blue bird</h3>
-                        <div>
-                            This a demo experiment to skew image container. It looks good.
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="a-box">
@@ -212,6 +178,43 @@
                     </div>
                 </div>
             </div>
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="a-box">
+                    <div class="img-container">
+                        <div class="img-inner">
+                            <div class="inner-skew">
+                                <img src="html.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-container">
+                        <h3>A blue bird</h3>
+                        <div>
+                            This a demo experiment to skew image container. It looks good.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="a-box">
+                    <div class="img-container">
+                        <div class="img-inner">
+                            <div class="inner-skew">
+                                <img src="html.png">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-container">
+                        <h3>A blue bird</h3>
+                        <div>
+                            This a demo experiment to skew image container. It looks good.
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
         </div>
     </div>
     <!-- /.container-fluid -->
