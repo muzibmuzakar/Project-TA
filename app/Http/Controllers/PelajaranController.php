@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Admin;
+use App\Models\Pelajaran;
 
 class PelajaranController extends Controller
 {
@@ -13,7 +15,8 @@ class PelajaranController extends Controller
      */
     public function index()
     {
-        //
+        $data = ['loggedUserInfo' =>Admin::where('id', '=', session('LoggedUser'))->first()];
+        return view('admin.pelajaran.pelajaran', $data);
     }
 
     /**
@@ -23,7 +26,8 @@ class PelajaranController extends Controller
      */
     public function create()
     {
-        //
+        $data = ['loggedUserInfo' =>Admin::where('id', '=', session('LoggedUser'))->first()];
+        return view('admin.pelajaran.addPelajaran', $data);
     }
 
     /**
@@ -34,7 +38,25 @@ class PelajaranController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'detail' => 'required',
+            'image' => 'mimes:jpeg,bmp,png,jpg',
+        ]);
+  
+        $input = $request->all();
+  
+        if ($image = $request->file('image')) {
+            $destinationPath = 'image/';
+            $pelajaranImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $pelajaranImage);
+            $input['image'] = "$pelajaranImage";
+        }
+    
+        Pelajaran::create($input);
+     
+        return redirect()->route('pelajaran.index')
+                        ->with('success','Product created successfully.');
     }
 
     /**
