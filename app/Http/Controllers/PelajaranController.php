@@ -70,7 +70,11 @@ class PelajaranController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = ['loggedUserInfo' =>Admin::where('id', '=', session('LoggedUser'))->first()];
+        $where = array('id' => $id);
+        $pelajaran['pelajaran'] = Pelajaran::where($where)->first();
+
+        return view('admin.pelajaran.detailPelajaran', $data, $pelajaran);
     }
 
     /**

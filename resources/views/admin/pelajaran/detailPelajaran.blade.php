@@ -56,9 +56,9 @@
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $loggedUserInfo['name'] }}</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $loggedUserInfo['username'] }}</span>
                     <img class="img-profile rounded-circle"
-                        src="img/undraw_profile.svg">
+                        src="{{ asset('img/undraw_profile.svg') }}">
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -92,55 +92,26 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Pelajaran</h1>
-            <a href="{{ route('pelajaran.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Tambah Pelajaran</a>
+            <h1 class="h3 mb-0 text-gray-800">Detail Pelajaran</h1>
+            <a href="{{ url()->previous() }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
         </div>
 
-        <!-- Content Row -->
-        <div class="row center" style="margin-left: 20px">
-
-            <!-- Earnings (Monthly) Card Example -->
-            @foreach ($pelajaran as $p)
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="a-box">
-                    <div class="img-container">
-                        <div class="img-inner">
-                            <div class="inner-skew">
-                                <img src="{{ url('/image/'.$p->image) }}">
-                            </div>
+        <div class="container-fluid">
+            <div class="jumbotron">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card" style="width:200px">
+                            <img class="card-img" src="{{ url('/image/'.$pelajaran->image) }}" alt="Card image" style="width:100%">
                         </div>
                     </div>
-                    <div class="text-container">
-                        <a href="{{ route('pelajaran.show',$p->id) }}" style="text-decoration: none"><h3>{{ $p->name }}</h3></a>
-                        <div class="text-truncate">
-                            {{ $p->detail }}
-                        </div>
-                        
-                    <div class="dropdown">
-                        <a class="btn-dropdown" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ route('pelajaran.show',$p->id) }}"><i class="far fa-eye"></i> Lihat Materi</a></li>
-                            <li><a class="dropdown-item" href="{{ route('pelajaran.edit',$p->id) }}"><i class="far fa-edit"></i> Ubah</a></li>
-                            <li>
-                                <form action="{{ route('pelajaran.destroy',$p->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="dropdown-item" }}"><i class="far fa-trash-alt"></i> Hapus</button>
-                                </form>
-                                
-                            </li>
-                        </ul>
-                    </div>
+                    <div class="col-md-9">
+                        <h1 class="display-3">{{ $pelajaran->name }}</h1>
+                        <hr class="my-2">
+                        <p>{{ $pelajaran->detail }}</p>
                     </div>
                 </div>
             </div>
-                
-            @endforeach
-
-            
         </div>
     </div>
     <!-- /.container-fluid -->
@@ -166,64 +137,10 @@
     </div>
 
     <style>
-        .a-box {
-            display: inline-block;
-            width: 240px;
-            text-align: center;
-        }
-        
-        .img-container {
-            height: 230px;
-            width: 200px;
-            overflow: hidden;
-            border-radius: 0px 0px 20px 20px;
-            display: inline-block;
-        }
-        
-        .img-container img {
-            height: 100%;
-            margin: -20px 0px 0px -25px;
-        }
-        
-        .inner-skew {
-            display: inline-block;
-            border-radius: 20px;
-            overflow: hidden;
-            padding: 0px;
-            font-size: 0px;
-            margin: 30px 0px 0px 0px;
-            background: #c8c2c2;
-            height: 250px;
-            width: 200px;
-        }
-        
-        .text-container {
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
-            padding: 120px 20px 20px 20px;
-            border-radius: 20px;
-            background: #fff;
-            margin: -120px 0px 0px 0px;
-            line-height: 19px;
-            font-size: 14px;
-        }
-        
-        .text-container h3 {
-            margin: 20px 0px 10px 0px;
-            color: #4e73df;
-            font-size: 18px;
-        }
-        /* css dropdown */
-        .dropdown-menu{
-            border-radius: 15px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
-        }
-
-        .btn-dropdown{
-            top: -100px;
-            margin-left: 180px;
-            font-size: 20px;
-            text-decoration: none;
-            color: black;
+        .jumbotron{
+            margin-left: -20px;
+            margin-right: -20px;
         }
     </style>
+
 @endsection
