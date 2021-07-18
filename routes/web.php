@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PelajaranController;
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,13 @@ use App\Http\Controllers\PelajaranController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// frontend Route
+Route::get('/', [MainController::class, 'index'])->name('home');
+
 
 // auth controller
 Route::post('/auth/save', [AdminController::class, 'save'])->name('auth.save');
