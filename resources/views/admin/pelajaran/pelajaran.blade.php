@@ -116,6 +116,24 @@
                         <div>
                             {{ $p->detail }}
                         </div>
+                        
+                    <div class="dropdown dropend">
+                        <a class="btn-dropdown" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li><a class="dropdown-item" href="#"><i class="far fa-eye"></i> Lihat Materi</a></li>
+                            <li><a class="dropdown-item" href="{{ route('pelajaran.edit',$p->id) }}"><i class="far fa-edit"></i> Ubah</a></li>
+                            <li>
+                                <form action="{{ route('pelajaran.destroy',$p->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                <button class="dropdown-item" }}"><i class="far fa-trash-alt"></i> Hapus</button>
+                                </form>
+                                
+                            </li>
+                        </ul>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -285,6 +303,19 @@
             margin: 20px 0px 10px 0px;
             color: #4e73df;
             font-size: 18px;
+        }
+        /* css dropdown */
+        .dropdown-menu{
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+        }
+
+        .btn-dropdown{
+            top: -100px;
+            margin-left: 180px;
+            font-size: 20px;
+            text-decoration: none;
+            color: black;
         }
     </style>
 @endsection

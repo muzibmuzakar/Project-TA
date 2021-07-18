@@ -59,7 +59,7 @@ class PelajaranController extends Controller
         Pelajaran::create($input);
      
         return redirect()->route('pelajaran.index')
-                        ->with('success','Product created successfully.');
+                        ->with('success','Pelajaran created successfully.');
     }
 
     /**
@@ -81,7 +81,11 @@ class PelajaranController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = ['loggedUserInfo' =>Admin::where('id', '=', session('LoggedUser'))->first()];
+        $where = array('id' => $id);
+        $pelajaran['pelajaran'] = Pelajaran::where($where)->first();
+
+        return view('admin.pelajaran.editPelajaran', $data, $pelajaran);
     }
 
     /**
@@ -93,7 +97,28 @@ class PelajaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'detail' => 'required',
+            'image' => 'mimes:jpeg,bmp,png,jpg',
+        ]);
+
+        $input = $request->except(['_token', '_method' ]);
+  
+        if ($image = $request->file('image')) {
+            $destinationPath = 'image/';
+            $pelajaranImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $pelajaranImage);
+            $input['image'] = "$pelajaranImage";
+        }else{
+            unset($input['image']);
+        }
+          
+        // $pelajaran->update($input);
+        Pelajaran::where('id',$id)->update($input);
+    
+        return redirect()->route('pelajaran.index')
+                        ->with('success','Pelajaran updated successfully');
     }
 
     /**
@@ -104,6 +129,8 @@ class PelajaranController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Pelajaran::where('id',$id)->delete();
+        return redirect()->route('pelajaran.index')
+                        ->with('success','Pelajaran deleted successfully');
     }
 }
