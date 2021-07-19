@@ -688,7 +688,7 @@ section {
   position: relative;
   overflow: hidden;
   background: #fff;
-  box-shadow: 0 0 29px 0 rgba(68, 88, 144, 0.12);
+  box-shadow: 0 0 29px 0 rgba(196, 197, 199, 0.12);
   transition: all 0.3s ease-in-out;
   border-radius: 8px;
   z-index: 1;
@@ -714,13 +714,6 @@ section {
 
 .featured-services .icon {
   margin-bottom: 15px;
-}
-
-.featured-services .icon i {
-  font-size: 48px;
-  line-height: 1;
-  color: #106eea;
-  transition: all 0.3s ease-in-out;
 }
 
 .featured-services .title {
@@ -911,7 +904,7 @@ section {
   width: 64px;
   height: 64px;
   background: #f1f6fe;
-  border-radius: 4px;
+  border-radius: 10px;
   border: 1px solid #deebfd;
   display: flex;
   align-items: center;
@@ -950,10 +943,6 @@ section {
 
 .services .icon-box:hover h4 a, .services .icon-box:hover .icon i {
   color: #106eea;
-}
-
-.services .icon-box:hover .icon {
-  border-color: #106eea;
 }
 
 /*--------------------------------------------------------------

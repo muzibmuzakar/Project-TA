@@ -56,7 +56,7 @@
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $loggedUserInfo['name'] }}</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $loggedUserInfo['username'] }}</span>
                     <img class="img-profile rounded-circle"
                         src="img/undraw_profile.svg">
                 </a>
@@ -107,7 +107,11 @@
                     <div class="img-container">
                         <div class="img-inner">
                             <div class="inner-skew">
-                                <img src="{{ url('/image/'.$p->image) }}">
+                                @if($p->image)
+                                    <img src="{{ url('/image/'.$p->image) }}" />
+                                @else
+                                    <img src="{{ asset('img/default-06.png')}}" />
+                                @endif
                             </div>
                         </div>
                     </div>

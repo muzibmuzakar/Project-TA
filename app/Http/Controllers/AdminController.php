@@ -63,7 +63,7 @@ class AdminController extends Controller
     function logout(){
         if (session()->has('LoggedUser')) {
             session()->pull('LoggedUser');
-            return redirect('/auth/login');
+            return redirect('/');
         };
     }
 
