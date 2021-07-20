@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PelajaranController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ use App\Http\Controllers\MainController;
 
 // frontend Route
 Route::get('/', [MainController::class, 'index'])->name('home');
+Route::get('/login', [UserController::class, 'signin'])->name('login');
 
 
 // auth controller

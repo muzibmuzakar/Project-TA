@@ -11,7 +11,6 @@
 
   <!-- Favicons -->
   <link href="assets-frontend/img/logo.png" rel="icon">
-  <link href="assets-frontend/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -27,6 +26,7 @@
   <!-- Template Main CSS File -->
   <link href="assets-frontend/css/style.css" rel="stylesheet">
   <link href="assets-frontend/css/quiz.css" rel="stylesheet">
+
 
 
   <!-- =======================================================
@@ -69,7 +69,7 @@
             </ul>
           </li>
           <li><a href="#contact">Contact</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="{{ route('login') }}">Sign In</a></li>
           <li><a href="#team">Team</a></li>
 
         </ul>
@@ -119,6 +119,7 @@
 
   <!-- Template Main JS File -->
   <script src="assets-frontend/js/main.js"></script>
+  <script src="js/login-page.js"></script>
 
 </body>
 
