@@ -51,26 +51,20 @@
           <li class="active"><a href="/">Home</a></li>
           <li><a href="#pelajaran">Pelajaran</a></li>
           <li><a href="#about">About</a></li>
-          <li class="drop-down"><a href="">Drop Down</a>
+          <li><a href="#contact">Contact</a></li>
+          @if(session()->has('LoginUser'))
+          <li class="drop-down">
+            <a href="#"><img class="img-profile rounded-circle" style="width: 35px; margin-top:-10px;" src="img/undraw_profile.svg"></a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="drop-down"><a href="#">Deep Drop Down</a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="/quiz">Quiz</a></li>
+              <li><a href="#">{{ $loginUserInfo['username'] }}</a></li>
               <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              <li><a href="{{ route('user.logout') }}">Logout</a></li>
             </ul>
           </li>
-          <li><a href="#contact">Contact</a></li>
+          @else
           <li><a href="{{ route('login') }}">Sign In</a></li>
-          <li><a href="#team">Team</a></li>
+          @endif        
+          
 
         </ul>
       </nav><!-- .nav-menu -->

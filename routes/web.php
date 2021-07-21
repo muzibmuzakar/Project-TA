@@ -23,8 +23,15 @@ use App\Http\Controllers\UserController;
 
 // frontend Route
 Route::get('/', [MainController::class, 'index'])->name('home');
-Route::get('/login', [UserController::class, 'signin'])->name('login');
 
+// auth frontend
+Route::post('/user/save', [UserController::class, 'save'])->name('user.save');
+Route::post('/user/check', [UserController::class, 'check'])->name('user.check');
+Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout');
+
+Route::group(['middleware'=>['UserAuth']], function(){
+    Route::get('/login', [UserController::class, 'signin'])->name('login');
+});
 
 // auth controller
 Route::post('/auth/save', [AdminController::class, 'save'])->name('auth.save');

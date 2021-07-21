@@ -8,6 +8,7 @@
     <!-- StyleSheet -->
     <link rel="stylesheet" href="{{ asset('assets-frontend/css/login-page.css') }}" />
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> --}}
 
   </head>
   <body>
@@ -24,17 +25,25 @@
                 <span data-id="#ff0066">Register now</span>
               </p>
             </div>
-            <form action="">
+            <form action="{{ route('user.check') }}" method="POST">
               <div class="form-control">
                 <h2>Hello Again!</h2>
                 <p>Welcome back you've been missed.</p>
-                <input type="text" placeholder="Enter Username" />
+                @if (Session::get('fail'))
+                    <div class="alert alert-danger">
+                        {{ Session::get('fail') }}
+                    </div>
+                @endif
+                @csrf
+                <input type="text" placeholder="Enter Email" name="email" value="{{ old('username') }}"/>
+                <span class="text-danger">@error('email'){{ $message }}@enderror</span>  
                 <div>
-                  <input type="password" placeholder="Password" />
+                  <input type="password" placeholder="Password" name="password"/>
                   <div class="icon form-icon">
                     <i class="far fa-eye"></i>{{-- <img src="{{ asset('assets-frontend/img/eye.svg') }}" alt="" /> --}}
                   </div>
                 </div>
+                <span class="text-danger">@error('password'){{ $message }}@enderror</span>
                 <input type="Submit" value="Login" />
               </div>
             </form>
@@ -50,23 +59,37 @@
                 <span data-id="#1a1aff">Login now</span>
               </p>
             </div>
-            <form action="">
+            <form action="{{ route('user.save') }}" method="POST" class="form">
               <div class="form-control">
                 <h2>Welcome Codevo!</h2>
                 <p>It's good to have you.</p>
-                <input type="email" placeholder="Enter Email" />
+                
+              @if (Session::get('success'))
+                  <div class="alert alert-success">
+                      {{ Session::get('success') }}
+                  </div>
+              @endif
+              @if (Session::get('fail'))
+                  <div class="alert alert-danger">
+                      {{ Session::get('fail') }}
+                  </div>
+              @endif
+              @csrf
                 <div>
-                  <input type="password" placeholder="Password" />
+                  <input type="text" placeholder="Username" name="username" value="{{ old('username') }}"/>
+                  <span class="text-danger">@error('username'){{ $message }}@enderror</span>
+                </div>
+                <div>
+                  <input type="email" placeholder="Enter Email" name="email" value="{{ old('email') }}"/>
+                  <span class="text-danger">@error('email'){{ $message }}@enderror</span>
+                </div>
+                <div>
+                  <input type="password" placeholder="Password" name="password" />
                   <div class="icon form-icon">
                     <i class="far fa-eye"></i>{{-- <img src="{{ asset('assets-frontend/img/eye.svg') }}" alt="" /> --}}
                   </div>
                 </div>
-                <div>
-                  <input type="password" placeholder="Confirm Password" />
-                  <div class="icon form-icon">
-                    <i class="far fa-eye"></i>{{-- <img src="{{ asset('assets-frontend/img/eye.svg') }}" alt="" /> --}}
-                  </div>
-                </div>
+                <span class="text-danger">@error('password'){{ $message }}@enderror</span>
                 <input type="Submit" value="Register" />
               </div>
             </form>

@@ -309,3 +309,7 @@ section .container.active .login .img-box {
 .close:after {
   transform: rotate(-45deg);
 }
+
+.text-danger{
+  color: #ff0066;
+}
