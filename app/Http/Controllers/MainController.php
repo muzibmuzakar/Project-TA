@@ -15,4 +15,12 @@ class MainController extends Controller
 
         return view('home', ['pelajaran' => $pelajaran], $data);
     }
+
+    public function pelajaranDetail($id){
+        $data = ['loginUserInfo' =>User::where('id', '=', session('LoginUser'))->first()];
+        $where = array('id' => $id);
+        $pelajaran['pelajaran'] = Pelajaran::where($where)->first();
+
+        return view('pelajaran', $data, $pelajaran);
+    }
 }

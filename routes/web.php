@@ -31,6 +31,7 @@ Route::get('/user/logout', [UserController::class, 'logout'])->name('user.logout
 
 Route::group(['middleware'=>['UserAuth']], function(){
     Route::get('/login', [UserController::class, 'signin'])->name('login');
+    Route::get('/pelajaranDetail/{id}', [MainController::class, 'pelajaranDetail'])->name('pelajaranDetail');
 });
 
 // auth controller
