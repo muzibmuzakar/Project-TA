@@ -20,7 +20,7 @@
                 <ul>
                   <li><strong>Pelajaran</strong>: {{ $pelajaran->name }}</li>
                   <li><strong>Client</strong>: ASU Company</li>
-                  <li><strong>Project date</strong>: {{ $pelajaran->updated_at->format('d-m-Y') }}</li>
+                  <li><strong>Update</strong>: {{ $pelajaran->updated_at->format('d-m-Y') }}</li>
                   <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
                 </ul>
               </div>

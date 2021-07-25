@@ -23,4 +23,10 @@ class MainController extends Controller
 
         return view('pelajaran', $data, $pelajaran);
     }
+
+    public function test(){
+        $data = ['loginUserInfo' =>User::where('id', '=', session('LoginUser'))->first()];
+
+        return view('test', $data);
+    }
 }

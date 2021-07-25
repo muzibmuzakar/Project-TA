@@ -23,6 +23,7 @@ use App\Http\Controllers\UserController;
 
 // frontend Route
 Route::get('/', [MainController::class, 'index'])->name('home');
+Route::get('/test', [MainController::class, 'test'])->name('test');
 
 // auth frontend
 Route::post('/user/save', [UserController::class, 'save'])->name('user.save');
