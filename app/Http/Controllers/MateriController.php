@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Pelajaran;
+use App\Models\Materi;
+use App\Models\Slide;
 
 class MateriController extends Controller
 {
@@ -36,7 +38,28 @@ class MateriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post =new Materi([
+            "judul" =>$request->judul,
+            "id_pelajaran" =>$request->id_pelajaran,
+            "video" =>$request->video,
+            "game" =>$request->game,
+        ]);
+        $post->save();
+
+        if($request->hasFile("images")){
+            $files=$request->file("images");
+            foreach($files as $file){
+                $imageName=$file->getClientOriginalName();
+                $request['materi_id']=$post->id;
+                $request['slide']=$imageName;
+                $file->move(\public_path("/slide"),$imageName);
+                Slide::create($request->all());
+
+            }
+        }
+
+        return redirect()->route('pelajaran.index')
+                        ->with('success','Pelajaran created successfully.');
     }
 
     /**

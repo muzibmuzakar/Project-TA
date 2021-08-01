@@ -98,7 +98,7 @@
         </div>
 
         <!-- Content Row -->
-        <form class="user" action="" enctype="multipart/form-data" method="POST">
+        <form class="user" action="{{ route('materi.store') }}" enctype="multipart/form-data" method="POST">
                                 
             @if (Session::get('success'))
                 <div class="alert alert-success">
@@ -113,22 +113,22 @@
             @csrf
             <div class="form-group">
                 <label for="name" class="form-label">Pelajaran :</label>
-                <select class="form-select form-control" disabled aria-label="Default select example">
-                    <option value="{{ $pelajaran->id }}">{{ $pelajaran->name }}</option>
+                <select name="id_pelajaran" class="form-select form-control" aria-label="Default select example">
+                    <option name="id_pelajaran" value="{{ $pelajaran->id }}">{{ $pelajaran->name }}</option>
                 </select>
                 {{-- <input type="text" id="name" class="form-control" name="name" placeholder="{{ $pelajaran->name }}" value="{{ $pelajaran->id }}" disabled> --}}
                 <span class="text-danger">@error('name'){{ $message }}@enderror</span>
             </div>
             <div class="form-group">
                 <label for="judul" class="form-label">Judul :</label>
-                <input type="text" id="judul" class="form-control" name="name" placeholder="Judul Materi" value="{{ old('judul') }}">
+                <input type="text" id="judul" class="form-control" name="judul" placeholder="Judul Materi" value="{{ old('judul') }}">
                 <span class="text-danger">@error('judil'){{ $message }}@enderror</span>
             </div>
             <div class="form-group">
                 <label for="slide" class="form-label">Slide Materi :</label>
                 <div class="card shadow-sm w-100">
                     <div class="card-header d-flex justify-content-end">
-                        <input type="file" name="Image" id="image" multiple="" class="d-none" onchange="image_select()">
+                        <input type="file" name="images[]" id="image" multiple="" class="d-none" onchange="image_select()">
                         <button class="btn btn-sm btn-success" type="button" onclick="document.getElementById('image').click()"><i class="fas fa-file-upload fa-sm text-white-50"></i> Upload Slide</button>
                     </div>
                     <div class="card-body d-flex flex-wrap justify-content-center" id="container">

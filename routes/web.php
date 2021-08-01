@@ -51,4 +51,5 @@ Route::group(['middleware'=>['AuthCheck']], function(){
     Route::resource('pelajaran', PelajaranController::class);
     // materi
     Route::get('/materi{id}', [MateriController::class, 'addMateri'])->name('materi.addMateri');
+    Route::post('/materi', [MateriController::class, 'store'])->name('materi.store');
 });
