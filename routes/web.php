@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PelajaranController;
+use App\Http\Controllers\MateriController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\UserController;
 
@@ -48,4 +49,6 @@ Route::group(['middleware'=>['AuthCheck']], function(){
 
     // pelajaran
     Route::resource('pelajaran', PelajaranController::class);
+    // materi
+    Route::get('/materi{id}', [MateriController::class, 'addMateri'])->name('materi.addMateri');
 });

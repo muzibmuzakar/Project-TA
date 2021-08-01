@@ -854,21 +854,3 @@ section {
     padding: 2px 0;
   }
 }
-
-@media (min-width: 768px){
-  .belajar{
-    margin-top: 50px;
-  }
-}
-
-@media (max-width: 768px){
-  .belajar{
-    margin-top: 15px;
-  }
-}
-
-.belajar .box-materi{
-  max-width: 1000px;
-  height: 530px;
-  background-color: #062b5b;
-}
