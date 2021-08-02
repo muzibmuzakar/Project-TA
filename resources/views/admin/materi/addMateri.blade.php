@@ -125,6 +125,11 @@
                 <span class="text-danger">@error('judil'){{ $message }}@enderror</span>
             </div>
             <div class="form-group">
+                <label for="detail" class="form-label">Detail :</label>
+                <textarea type="text" id="detail" class="form-control" name="detail" placeholder="Detail" value="{{ old('detail') }}"></textarea>
+                <span class="text-danger">@error('detail'){{ $message }}@enderror</span>
+            </div>
+            <div class="form-group">
                 <label for="slide" class="form-label">Slide Materi :</label>
                 <div class="card shadow-sm w-100">
                     <div class="card-header d-flex justify-content-end">

@@ -43,6 +43,7 @@ class MateriController extends Controller
             "id_pelajaran" =>$request->id_pelajaran,
             "video" =>$request->video,
             "game" =>$request->game,
+            "detail" =>$request->detail,
         ]);
         $post->save();
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Slide;
+use App\Models\Pelajaran;
 
 class Materi extends Model
 {
@@ -14,7 +15,12 @@ class Materi extends Model
         'judul',
         'video',
         'game',
+        'detail',
     ];
+
+    public function materi(){
+        return $this->belongsTo(Pelajaran::class);
+    }
 
     public function slide(){
         return $this->hasMany(Slide::class);

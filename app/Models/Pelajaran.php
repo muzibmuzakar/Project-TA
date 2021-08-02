@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Materi;
 
 class Pelajaran extends Model
 {
@@ -13,4 +14,8 @@ class Pelajaran extends Model
     protected $fillable = [
         'name', 'detail', 'image'
     ];
+
+    public function slide(){
+        return $this->hasMany(Materi::class);
+    }
 }

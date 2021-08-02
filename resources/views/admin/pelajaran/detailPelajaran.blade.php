@@ -56,7 +56,7 @@
             <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $loggedUserInfo['username'] }}</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
                     <img class="img-profile rounded-circle"
                         src="{{ asset('img/undraw_profile.svg') }}">
                 </a>
@@ -100,20 +100,76 @@
         <div class="container-fluid">
             <div class="jumbotron">
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-3 d-flex justify-content-center">
                         <div class="card" style="width:200px">
                             <img class="card-img" src="{{ url('/image/'.$pelajaran->image) }}" alt="Card image" style="width:100%">
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <h1 class="display-3">{{ $pelajaran->name }}</h1>
+                        <h2 class="name-pelajaran">{{ $pelajaran->name }}</h2>
                         <hr class="my-2">
                         <p>{{ $pelajaran->detail }}</p>
+                        <div class="btn-options d-flex justify-content-end mt-4">
+                            <button class="materi-save btn-sm" type="button" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-cog fa-sm mr-2"></i> Options
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="{{ route('pelajaran.edit',$pelajaran->id) }}"><i class="far fa-edit"></i> Ubah</a></li>
+                                <li>
+                                    <form action="{{ route('pelajaran.destroy',$pelajaran->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="dropdown-item" }}"><i class="far fa-trash-alt"></i> Hapus</button>
+                                    </form>
+                                    
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-            <a href="{{ route('materi.addMateri',$pelajaran->id) }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i
-                class="fas fa-plus fa-sm"></i> Add Materi</a>
+            <div class="btn-add-materi d-flex justify-content-between">
+                <h2 class="h4 mb-0 text-gray-800">Daftar Materi <span>:</span></h2>
+                <a href="{{ route('materi.addMateri',$pelajaran->id) }}" class="btn btn-sm btn-success shadow-sm"><i class="fas fa-plus fa-sm"></i> Add Materi</a>
+            </div>
+
+            @foreach ($materi as $m) 
+            <div class="card-materi">
+                <article class="materi">
+                    <div class="materi-box">
+                        <img src="{{ url('/image/'.$pelajaran->image) }}" width="1500" height="1368" alt="">
+                    </div>
+                    <div class="materi-content">
+                        <h1 class="materi-title"><a href="#">{{ $m->judul }}</a></h1>
+            
+                        <p class="materi-metadata">
+                            <span class="materi-votes">(12 votes)</span>
+                        </p>
+            
+                        <p class="materi-desc">{{ $m->detail }}</p>
+                        <div class="btn-options d-flex justify-content-end mt-4">
+                            <button class="materi-save btn-sm" type="button" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-cog fa-sm mr-2"></i> Options
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="{{ route('materi.show',$m->id) }}"><i class="far fa-eye"></i> Lihat Materi</a></li>
+                                <li><a class="dropdown-item" href="{{ route('materi.edit',$m->id) }}"><i class="far fa-edit"></i> Ubah</a></li>
+                                <li>
+                                    <form action="{{ route('materi.destroy',$m->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="dropdown-item" }}"><i class="far fa-trash-alt"></i> Hapus</button>
+                                    </form>
+                                    
+                                </li>
+                            </ul>
+                        </div>
+            
+                    </div>
+                </article>
+            </div>
+            
+            @endforeach
         </div>
     </div>
     <!-- /.container-fluid -->
@@ -145,6 +201,100 @@
             background-color: #fff;
             box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
             border-radius: 15px;
+        }
+
+        .card-materi{
+            margin-top: 20px;
+        }
+        .materi,
+        .materi-box {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);
+        background-color: #fff;
+        }
+
+        .materi-box {
+        flex: 3 1 30ch;
+        height: calc(202px + 5vw);
+        overflow: hidden;
+        }
+        .materi-box img {
+        max-width: 100%;
+        min-height: 100%;
+        margin-top : -40px;
+        width: auto;
+        height: auto;
+        -o-object-fit: cover;
+            object-fit: cover;
+        -o-object-position: 50% 50%;
+            object-position: 50% 50%;
+        }
+        @media (min-width:782px){
+            .materi-box img {
+                margin-top : -80px;
+            }
+        }
+        .materi {
+        border: 2px solid #F2F2F2;
+        border-radius: 8px;
+        overflow: hidden;
+        }
+        .materi-content {
+        padding: 16px 32px;
+        flex: 4 1 40ch;
+        }
+        .materi-title {
+        margin: 0;
+        font-size: clamp(1.4em, 2.1vw, 2.1em);
+        font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
+        }
+        .materi-title a {
+        text-decoration: none;
+        color: inherit;
+        }
+        .materi-metadata {
+        margin: 0;
+        }
+        .materi-votes {
+        font-size: 0.825em;
+        font-style: italic;
+        color: var(--lightgrey);
+        }
+        .materi-save {
+        display: flex;
+        align-items: center;
+        padding: 6px 14px 6px 12px;
+        border-radius: 4px;
+        border: 2px solid currentColor;
+        color: var(--primary);
+        background: none;
+        cursor: pointer;
+        font-weight: bold;
+        }
+        /* css dropdown */
+        .dropdown-menu{
+            border-radius: 15px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+        }
+
+        .btn-dropdown{
+            top: -100px;
+            margin-left: 180px;
+            font-size: 20px;
+            text-decoration: none;
+            color: black;
+        }
+        @media(max-width:782px){
+            .name-pelajaran{
+                padding-top: 20px;
+            }
+        }
+        @media(min-width:782px){
+            .name-pelajaran{
+                padding-top: 20px;
+            }
         }
     </style>
 

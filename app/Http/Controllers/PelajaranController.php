@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Pelajaran;
+use App\Models\Materi;
+use Illuminate\Support\Facades\DB;
 
 class PelajaranController extends Controller
 {
@@ -73,8 +75,11 @@ class PelajaranController extends Controller
         $data = ['loggedUserInfo' =>Admin::where('id', '=', session('LoggedUser'))->first()];
         $where = array('id' => $id);
         $pelajaran['pelajaran'] = Pelajaran::where($where)->first();
+        $mat = array('id_pelajaran' => $id);
+        $materi['materi'] = Materi::where($mat)->get();
+        // $materi = DB::table('materis')->where('id_pelajaran',$id)->get();
 
-        return view('admin.pelajaran.detailPelajaran', $data, $pelajaran);
+        return view('admin.pelajaran.detailPelajaran', $data, $pelajaran)->with($materi);
     }
 
     /**
