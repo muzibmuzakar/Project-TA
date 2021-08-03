@@ -52,6 +52,7 @@ Route::group(['middleware'=>['AuthCheck']], function(){
     // materi
     Route::get('/materi{id}', [MateriController::class, 'addMateri'])->name('materi.addMateri');
     Route::post('/materi', [MateriController::class, 'store'])->name('materi.store');
+    Route::delete('/deleteSlide/{id}', [MateriController::class, 'deleteSlide'])->name('materi.deleteSlide');
     Route::resource('materi', MateriController::class);
 
 });

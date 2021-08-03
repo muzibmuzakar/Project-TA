@@ -58,7 +58,7 @@
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ $loggedUserInfo['username'] }}</span>
                     <img class="img-profile rounded-circle"
-                        src="img/undraw_profile.svg">
+                        src="{{ asset('img/undraw_profile.svg') }}">
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -92,59 +92,76 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Pelajaran</h1>
-            <a href="{{ route('pelajaran.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Tambah Pelajaran</a>
+            <h1 class="h3 mb-0 text-gray-800">Tambah Materi</h1>
+            <a href="{{ url()->previous() }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
         </div>
 
         <!-- Content Row -->
-        <div class="row center" style="margin-left: 20px">
-
-            <!-- Earnings (Monthly) Card Example -->
-            @foreach ($pelajaran as $p)
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="a-box">
-                    <div class="img-container">
-                        <div class="img-inner">
-                            <div class="inner-skew">
-                                @if($p->image)
-                                    <img src="{{ url('/image/'.$p->image) }}" />
-                                @else
-                                    <img src="{{ asset('img/default-06.png')}}" />
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-container">
-                        <a href="{{ route('pelajaran.show',$p->id) }}" style="text-decoration: none"><h3>{{ $p->name }}</h3></a>
-                        <div class="text-truncate">
-                            {{ $p->detail }}
-                        </div>
-                        
-                    <div class="dropdown">
-                        <a class="btn-dropdown" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ route('pelajaran.show',$p->id) }}"><i class="far fa-eye"></i> Lihat Materi</a></li>
-                            <li><a class="dropdown-item" href="{{ route('pelajaran.edit',$p->id) }}"><i class="far fa-edit"></i> Ubah</a></li>
-                            <li>
-                                <form action="{{ route('pelajaran.destroy',$p->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="dropdown-item" ><i class="far fa-trash-alt"></i> Hapus</button>
-                                </form>
+        <form class="user" action="{{ route('materi.update',$materi->id) }}" enctype="multipart/form-data" method="POST">
                                 
-                            </li>
-                        </ul>
+            @if (Session::get('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
+            @if (Session::get('fail'))
+                <div class="alert alert-danger">
+                    {{ Session::get('fail') }}
+                </div>
+            @endif
+            @csrf
+            @method('PUT')
+            <div class="form-group">
+                <label for="name" class="form-label">Pelajaran :</label>
+                <input type="text" id="name" class="form-control" name="pelajatan" placeholder="Pelajran" value="{{ $materi->id_pelajaran }}">
+                <span class="text-danger">@error('name'){{ $message }}@enderror</span>
+            </div>
+            <div class="form-group">
+                <label for="judul" class="form-label">Judul :</label>
+                <input type="text" id="judul" class="form-control" name="judul" placeholder="Judul Materi" value="{{ $materi->judul }}">
+                <span class="text-danger">@error('judil'){{ $message }}@enderror</span>
+            </div>
+            <div class="form-group">
+                <label for="detail" class="form-label">Detail :</label>
+                <textarea type="text" id="detail" class="form-control" name="detail" placeholder="Detail">{{ $materi->detail }}</textarea>
+                <span class="text-danger">@error('detail'){{ $message }}@enderror</span>
+            </div>
+            <div class="form-group">
+                <label for="slide" class="form-label">Slide Materi :</label>
+                <div class="card shadow-sm w-100">
+                    <div class="card-header d-flex justify-content-end">
+                        <input type="file" name="images[]" id="image" multiple="" class="d-none" onchange="image_select()">
+                        <button class="btn btn-sm btn-success" type="button" onclick="document.getElementById('image').click()"><i class="fas fa-file-upload fa-sm text-white-50"></i> Upload Slide</button>
                     </div>
+                    <div class="card-body" >
+                        <div class=" d-flex flex-wrap justify-content-center" id="container">
+
+                        </div>                          
                     </div>
                 </div>
-            </div>
                 
-            @endforeach
-
-            
+                <span class="text-danger">@error('image'){{ $message }}@enderror</span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-user btn-block">
+                Simpan Materi
+            </button>
+        </form>
+        <div class="preview d-flex flex-wrap justify-content-center">
+            <!-- image preview -->
+          @if (count($materi->slide)>0)
+          @foreach ($materi->slide as $img)
+          <div class="image_container d-flex justify-content-center position-relative">
+            <img src="/slide/{{ $img->slide }}" alt="Image">
+            <form action="{{ route('materi.deleteSlide',$img->id) }}" method="post">
+                @csrf
+                @method('delete')
+                <button type="submit">
+                <span class="position-absolute">&times;</span></button>
+            </form>
+          </div>
+          @endforeach
+          @endif
         </div>
     </div>
     <!-- /.container-fluid -->
@@ -170,64 +187,75 @@
     </div>
 
     <style>
-        .a-box {
-            display: inline-block;
-            width: 240px;
-            text-align: center;
-        }
-        
-        .img-container {
-            height: 230px;
+        .image_container {
+            height: 120px;
             width: 200px;
+            border-radius: 6px;
             overflow: hidden;
-            border-radius: 0px 0px 20px 20px;
-            display: inline-block;
+            margin: 10px;
         }
-        
-        .img-container img {
-            height: 100%;
-            margin: -20px 0px 0px -25px;
+        .image_container img {
+            height: auto;
+            width: auto;
+            object-fit: cover;
         }
-        
-        .inner-skew {
-            display: inline-block;
-            border-radius: 20px;
-            overflow: hidden;
-            padding: 0px;
-            font-size: 0px;
-            margin: 30px 0px 0px 0px;
-            background: #c8c2c2;
-            height: 250px;
-            width: 200px;
-        }
-        
-        .text-container {
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
-            padding: 120px 20px 20px 20px;
-            border-radius: 20px;
-            background: #fff;
-            margin: -120px 0px 0px 0px;
-            line-height: 19px;
-            font-size: 14px;
-        }
-        
-        .text-container h3 {
-            margin: 20px 0px 10px 0px;
-            color: #4e73df;
-            font-size: 18px;
-        }
-        /* css dropdown */
-        .dropdown-menu{
-            border-radius: 15px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
-        }
-
-        .btn-dropdown{
-            top: -100px;
-            margin-left: 180px;
-            font-size: 20px;
-            text-decoration: none;
-            color: black;
+        .image_container span {
+            top: -6px;
+            right: 8px;
+            color: red;
+            font-size: 28px;
+            font-weight: normal;
+            cursor: pointer;
         }
     </style>
+
+    <script>
+        var images = [];
+   	  function image_select() {
+   	  	  var image = document.getElementById('image').files;
+   	  	  for (i = 0; i < image.length; i++) {
+   	  	  	  if (check_duplicate(image[i].name)) {
+                images.push({
+   	  	  	  	    "name" : image[i].name,
+   	  	  	  	    "url" : URL.createObjectURL(image[i]),
+   	  	  	  	    "file" : image[i],
+   	  	  	    })
+   	  	  	  } else 
+   	  	  	  {
+   	  	  	  	 alert(image[i].name + " is already added to the list");
+   	  	  	  }
+   	  	  }
+   	  	  document.getElementById('container').innerHTML = image_show();
+   	  }
+
+   	  function image_show() {
+   	  	  var image = "";
+   	  	  images.forEach((i) => {
+   	  	  	 image += `<div class="image_container d-flex justify-content-center position-relative">
+   	  	  	  	  <img src="`+ i.url +`" alt="Image">
+   	  	  	  	  <span class="position-absolute" onclick="delete_image(`+ images.indexOf(i) +`)">&times;</span>
+   	  	  	  </div>`;
+   	  	  })
+   	  	  return image;
+   	  }
+   	  function delete_image(e) {
+   	  	  images.splice(e, 1);
+   	  	  document.getElementById('container').innerHTML = image_show();
+   	  }
+
+   	  function check_duplicate(name) {
+   	  	var image = true;
+   	  	if (images.length > 0) {
+   	  		for (e = 0; e < images.length; e++) {
+   	  			if (images[e].name == name) {
+   	  				image = false;
+   	  				break;
+   	  			}
+   	  		}
+   	  	}
+   	  	return image;
+   	  }
+
+    </script>
+
 @endsection
