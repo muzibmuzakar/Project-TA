@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pelajaran;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Materi;
 
 class MainController extends Controller
 {
@@ -21,7 +21,19 @@ class MainController extends Controller
         $where = array('id' => $id);
         $pelajaran['pelajaran'] = Pelajaran::where($where)->first();
 
-        return view('pelajaran', $data, $pelajaran);
+        $mat = array('id_pelajaran' => $id);
+        $materi['materi'] = Materi::where($mat)->get();
+
+        return view('pelajaran', $data, $pelajaran)->with($materi);
+    }
+
+    public function belajar($id){
+        $data = ['loginUserInfo' =>User::where('id', '=', session('LoginUser'))->first()];
+
+        $where = array('id' => $id);
+        $materi['materi'] = Materi::where($where)->first();        
+
+        return view('belajar', $data)->with($materi);
     }
 
     public function test(){

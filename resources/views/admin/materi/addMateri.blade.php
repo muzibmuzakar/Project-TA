@@ -130,6 +130,16 @@
                 <span class="text-danger">@error('detail'){{ $message }}@enderror</span>
             </div>
             <div class="form-group">
+                <label for="video" class="form-label">Link Video :</label>
+                <input type="text" id="video" class="form-control" name="video" placeholder="video Materi" value="{{ old('video') }}">
+                <span class="text-danger">@error('judil'){{ $message }}@enderror</span>
+            </div>
+            <div class="form-group">
+                <label for="game" class="form-label">Link Game :</label>
+                <input type="text" id="video" class="form-control" name="game" placeholder="game Materi" value="{{ old('game') }}">
+                <span class="text-danger">@error('judil'){{ $message }}@enderror</span>
+            </div>
+            <div class="form-group">
                 <label for="slide" class="form-label">Slide Materi :</label>
                 <div class="card shadow-sm w-100">
                     <div class="card-header d-flex justify-content-end">

@@ -103,6 +103,8 @@ class MateriController extends Controller
         $post->update([
             "judul" =>$request->judul,
             "detail"=>$request->detail,
+            "video" =>$request->video,
+            "game" =>$request->game,
         ]);
 
         if($request->hasFile("images")){

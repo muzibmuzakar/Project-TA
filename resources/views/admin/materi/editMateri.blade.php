@@ -92,7 +92,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Tambah Materi</h1>
+            <h1 class="h3 mb-0 text-gray-800">Ubah Materi</h1>
             <a href="{{ url()->previous() }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-arrow-left fa-sm text-white-50"></i> Kembali</a>
         </div>
@@ -126,6 +126,16 @@
                 <label for="detail" class="form-label">Detail :</label>
                 <textarea type="text" id="detail" class="form-control" name="detail" placeholder="Detail">{{ $materi->detail }}</textarea>
                 <span class="text-danger">@error('detail'){{ $message }}@enderror</span>
+            </div>
+            <div class="form-group">
+                <label for="video" class="form-label">Link Video :</label>
+                <input type="text" id="video" class="form-control" name="video" placeholder="video Materi" value="{{ $materi->video }}">
+                <span class="text-danger">@error('judil'){{ $message }}@enderror</span>
+            </div>
+            <div class="form-group">
+                <label for="game" class="form-label">Link Game :</label>
+                <input type="text" id="video" class="form-control" name="game" placeholder="game Materi" value="{{ $materi->game }}">
+                <span class="text-danger">@error('judil'){{ $message }}@enderror</span>
             </div>
             <div class="form-group">
                 <label for="slide" class="form-label">Slide Materi :</label>
