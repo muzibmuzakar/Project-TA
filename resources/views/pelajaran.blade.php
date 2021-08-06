@@ -26,6 +26,11 @@
 
     <div class="uk-container uk-padding">
       <div class="uk-timeline">
+        @if ($materi->isEmpty())
+          <div class="uk-alert-danger" uk-alert>
+            <p>Materi pada pelajaran {{ $pelajaran->name }} belum tersedia.</p>
+          </div>
+        @else
         @foreach ($materi as $m)
         <div class="uk-timeline-item">
             <div class="uk-timeline-icon">
@@ -47,6 +52,8 @@
         </div>
             
         @endforeach
+            
+        @endif
       </div>
     </div>
   </div>

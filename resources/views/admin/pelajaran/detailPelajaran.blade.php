@@ -133,6 +133,12 @@
                 <a href="{{ route('materi.addMateri',$pelajaran->id) }}" class="btn btn-sm btn-success shadow-sm"><i class="fas fa-plus fa-sm"></i> Add Materi</a>
             </div>
 
+            @if ($materi->isEmpty())
+                <div class="text-center mt-5">
+                    <p class="text-gray-500 mb-0">Belum ada materi yang tersedia pada pelajaran {{ $pelajaran->name }}</p>
+                    <a href="{{ route('materi.addMateri',$pelajaran->id) }}"><i class="fas fa-plus fa-sm"></i>  Tambah Materi</a>
+                </div>
+            @else
             @foreach ($materi as $m) 
             <div class="card-materi">
                 <article class="materi">
@@ -170,6 +176,8 @@
             </div>
             
             @endforeach
+                
+            @endif
         </div>
     </div>
     <!-- /.container-fluid -->
