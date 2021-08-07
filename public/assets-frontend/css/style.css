@@ -863,7 +863,7 @@ section {
   margin: auto;
   overflow: hidden;
   background: #fff;
-  box-shadow: 0 0 29px 0 rgba(68, 88, 144, 0.12);
+  box-shadow: 0 0 29px 0 rgba(40, 46, 65, 0.233);
   transition: all 0.3s ease-in-out;
   border-radius: 8px;
   /* z-index: 1; */
@@ -921,11 +921,11 @@ section {
   font-size: 18px;
 }
 
-.featured-services .title a {
+.featured-services .title {
   color: #111;
 }
 
-.featured-services .icon-box:hover .title a, .featured-services .icon-box:hover .description {
+.featured-services .icon-box:hover .title, .featured-services .icon-box:hover .description {
   color: #fff;
 }
 

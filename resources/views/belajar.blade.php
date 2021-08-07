@@ -48,6 +48,7 @@
                         </div>
                     </a>
           
+                    @if ($materi->video)
                     <div uk-lightbox>
                         <a href="{{ $materi->video }}" data-attrs="width: 1000;">
                             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
@@ -58,8 +59,12 @@
                             </div>
                         </a>
                     </div>
+                    @else
+                        
+                    @endif
+                    
           
-                    <div uk-lightbox>
+                    {{-- <div uk-lightbox>
                         <a href="http://localhost/game/" data-type="iframe" data-attrs="width: 1000; data-type: iframe;">
                             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                                 <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
@@ -68,12 +73,25 @@
                                 </div>
                             </div>
                         </a>
-                    </div>
+                    </div> --}}
+
+                    @if ($materi->game)
+                    <a href="http://localhost/game/" data-type="iframe" data-attrs="width: 1000; data-type: iframe;">
+                        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+                                <div class="icon"><i class="bx bx-file"></i></div>
+                                <h4 class="title">Game</h4>
+                            </div>
+                        </div>
+                    </a>
+                    @else
+                        
+                    @endif
           
                     <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                       <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
                         <div class="icon"><i class="bx bx-world"></i></div>
-                        <h4 class="title"><a href="">Quiz</a></h4>
+                        <h4 class="title">Quiz</h4>
                       </div>
                     </div>
           
@@ -81,10 +99,6 @@
           
                 </div>
               </section>
-
-            <button class="uk-button uk-button-primary uk-button-small" onclick="document.getElementById('uk-slid').click()">cek</button>
-            <a onclick="document.getElementById('uk-slid').click()" style="box-shadow: 0 .15rem 1.75rem 0 rgba(58,59,69,.15);"><img width="50px" src="{{ asset('img/logo.png') }}"></a>
-            
         </div>
     </div>
 
