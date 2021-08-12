@@ -16,7 +16,7 @@
                 {{-- slideshow --}}
                 <div class="uk-position-relative uk-visible-toggle uk-light" uk-slideshow="animation: pull;">
 
-                    <ul class="uk-slideshow-items d-none" uk-lightbox>
+                    <ul class="uk-slideshow-items d-none" uk-lightbox="animation: scale">
                         @if (count($materi->slide)>0)
                         @foreach ($materi->slide as $img)
                         <li>
@@ -64,8 +64,8 @@
                     @endif
                     
           
-                    {{-- <div uk-lightbox>
-                        <a href="http://localhost/game/" data-type="iframe" data-attrs="width: 1000; data-type: iframe;">
+                    <div uk-lightbox>
+                        <a href="http://localhost/game/" data-type="iframe" data-attrs="width: 200; height: 100;">
                             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                                 <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
                                     <div class="icon"><i class="bx bx-file"></i></div>
@@ -73,20 +73,7 @@
                                 </div>
                             </div>
                         </a>
-                    </div> --}}
-
-                    @if ($materi->game)
-                    <a href="http://localhost/game/" data-type="iframe" data-attrs="width: 1000; data-type: iframe;">
-                        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                            <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-                                <div class="icon"><i class="bx bx-file"></i></div>
-                                <h4 class="title">Game</h4>
-                            </div>
-                        </div>
-                    </a>
-                    @else
-                        
-                    @endif
+                    </div>
           
                     <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                       <div class="icon-box" data-aos="fade-up" data-aos-delay="400">

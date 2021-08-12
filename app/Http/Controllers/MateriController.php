@@ -110,7 +110,7 @@ class MateriController extends Controller
         if($request->hasFile("images")){
             $files=$request->file("images");
             foreach($files as $file){
-                $imageName=time().'_'.$file->getClientOriginalName();
+                $imageName=$file->getClientOriginalName();
                 $request["materi_id"]=$id;
                 $request["slide"]=$imageName;
                 $file->move(\public_path("/slide"),$imageName);
