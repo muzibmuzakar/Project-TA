@@ -42,7 +42,7 @@
                     <a  onclick="document.getElementById('uk-slid').click()">
                         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-                                <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                                <div class="icon"><i class="bx bx-slideshow"></i></div>
                                 <h4 class="title">Slide Materi</h4>
                             </div>
                         </div>
@@ -53,7 +53,7 @@
                         <a href="{{ $materi->video }}" data-attrs="width: 1000;">
                             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                                 <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-                                    <div class="icon"><i class="bx bx-file"></i></div>
+                                    <div class="icon"><i class="bx bxs-videos"></i></div>
                                     <h4 class="title">Materi Video</h4>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                         <a href="{{ url('http://localhost/'. $materi->game) }}" data-type="iframe">
                             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                                 <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
-                                    <div class="icon"><i class="bx bx-file"></i></div>
+                                    <div class="icon"><i class="bx bx-joystick-button"></i></div>
                                     <h4 class="title">Game</h4>
                                 </div>
                             </div>
@@ -77,13 +77,21 @@
                     @else
                         
                     @endif
-          
-                    <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
-                      <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
-                        <div class="icon"><i class="bx bx-world"></i></div>
-                        <h4 class="title">Quiz</h4>
-                      </div>
+                    
+                    {{-- @if ($materi->quiz) --}}
+                    <div uk-lightbox>
+                        <a href="{{ url('http://localhost/'. $materi->quiz) }}" data-type="iframe">
+                            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+                                <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
+                                    <div class="icon"><i class='bx bx-list-check'></i></div>
+                                    <h4 class="title">Quiz</h4>
+                                </div>
+                            </div>
+                        </a>
                     </div>
+                    {{-- @else --}}
+                        
+                    {{-- @endif --}}
           
                   </div>
           

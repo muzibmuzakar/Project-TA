@@ -859,7 +859,7 @@ section {
 # Featured Services
 --------------------------------------------------------------*/
 .featured-services .icon-box {
-  /* padding: 10px; */
+  padding-top: 20px;
   margin: auto;
   overflow: hidden;
   background: #fff;

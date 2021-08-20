@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PelajaranController;
 use App\Http\Controllers\MateriController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\QuizController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -55,5 +56,8 @@ Route::group(['middleware'=>['AuthCheck']], function(){
     Route::post('/materi', [MateriController::class, 'store'])->name('materi.store');
     Route::delete('/deleteSlide/{id}', [MateriController::class, 'deleteSlide'])->name('materi.deleteSlide');
     Route::resource('materi', MateriController::class);
+
+    // quiz
+    Route::resource('quiz', QuizController::class);
 
 });

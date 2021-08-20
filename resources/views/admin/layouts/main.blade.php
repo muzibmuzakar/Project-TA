@@ -63,6 +63,12 @@
                     <span>Pelajaran</span></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('quiz.index') }}">
+                    <i class="fas fa-fw fa-atlas"></i>
+                    <span>Quiz</span></a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
