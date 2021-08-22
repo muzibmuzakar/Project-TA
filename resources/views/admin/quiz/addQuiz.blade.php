@@ -105,23 +105,34 @@
         </div>
 
         <!-- Content Row -->
-        <form action="" method="post">
+        <form action="{{ route('quiz.store') }}" enctype="multipart/form-data" method="POST">
+            @if (Session::get('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
+            @if (Session::get('fail'))
+                <div class="alert alert-danger">
+                    {{ Session::get('fail') }}
+                </div>
+            @endif
+            @csrf
             <div uk-grid>
                 <div class="uk-width-1-2@s">
                     <label class="form-label" for="form-stacked-select">Pelajaran</label>
                     <div class="uk-form-controls">
-                        <select class="uk-select" id="form-stacked-select">
-                            <option>Option 01</option>
-                            <option>Option 02</option>
+                        <select class="uk-select" id="form-stacked-select" name="pelajaran_id">
+                            <option value="1">pelajaran 01</option>
+                            <option value="2">pelajaran 02</option>
                         </select>
                     </div>
                 </div>
                 <div class="uk-width-1-2@s">
                     <label class="form-label" for="form-stacked-select">Materi</label>
                     <div class="uk-form-controls">
-                        <select class="uk-select" id="form-stacked-select">
-                            <option>Option 01</option>
-                            <option>Option 02</option>
+                        <select class="uk-select" id="form-stacked-select" name="materi_id">
+                            <option value="1">materi 01</option>
+                            <option value="2">materi 02</option>
                         </select>
                     </div>
                 </div>
@@ -133,47 +144,47 @@
                         <div class="form-group">
                             <label class="form-label" for="form-stacked-text">Pertanyaan :</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" name="addmore[0][question]" id="form-stacked-text" type="text" placeholder="Masukan pertanyaan...">
+                                <input class="uk-input" name="question[0]" id="form-stacked-text" type="text" placeholder="Masukan pertanyaan...">
                             </div>
                         </div>
                         <div class="uk-grid-match uk-child-width-1-2@m" uk-grid>
                             <div class="form-grup">
                                 <label class="form-label" for="form-stacked-text">Pilihan 1 :</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" name="addmore[0][choice1]" id="form-stacked-text" type="text" placeholder="Masukan pilihan 1...">
+                                    <input class="uk-input" name="choice1[0]" id="form-stacked-text" type="text" placeholder="Masukan pilihan 1...">
                                 </div>
                             </div>
                             <div class="form-grup">
                                 <label class="form-label" for="form-stacked-text">Pilihan 2 :</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" name="addmore[0][choice2]" id="form-stacked-text" type="text" placeholder="Masukan pilihan 2...">
+                                    <input class="uk-input" name="choice2[0]" id="form-stacked-text" type="text" placeholder="Masukan pilihan 2...">
                                 </div>
                             </div>
                             <div class="form-grup" style="margin-top: 20px;">
                                 <label class="form-label" for="form-stacked-text">Pilihan 3 :</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" name="addmore[0][choice3]" id="form-stacked-text" type="text" placeholder="Masukan pilihan 3...">
+                                    <input class="uk-input" name="choice3[0]" id="form-stacked-text" type="text" placeholder="Masukan pilihan 3...">
                                 </div>
                             </div>
                             <div class="form-grup" style="margin-top: 20px;">
                                 <label class="form-label" for="form-stacked-text">Pilihan 4 :</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" name="addmore[0][choice4]" id="form-stacked-text" type="text" placeholder="Masukan pilihan 4...">
+                                    <input class="uk-input" name="choice4[0]" id="form-stacked-text" type="text" placeholder="Masukan pilihan 4...">
                                 </div>
                             </div>
                             <div class="form-grup" style="margin-top: 20px;">
                                 <label class="form-label" for="form-stacked-text">Pilihan Benar :</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" name="addmore[0][answer]" id="form-stacked-text" type="text" placeholder="Masukan no pilihan yang benar...">
+                                    <input class="uk-input" name="answer[0]" id="form-stacked-text" type="text" placeholder="Masukan no pilihan yang benar...">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <a class="float-right d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" id="addSoal">
+            <a class="float-right d-none d-sm-inline-block btn btn-sm btn-warning shadow-sm" id="addSoal">
                 <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Soal</a>
-            <button class="btn btn-success">Simpan</button>
+            <button class="btn btn-success" type="submit">Simpan</button>
         </form>
     </div>
     <!-- /.container-fluid -->
@@ -213,38 +224,38 @@
                         '<div class="form-group">'+
                             '<label class="form-label" for="form-stacked-text">Pertanyaan :</label>'+
                             '<div class="uk-form-controls">'+
-                                '<input class="uk-input" name="addmore['+i+'][question]" id="form-stacked-text" type="text" placeholder="Masukan pertanyaan...">'+
+                                '<input class="uk-input" name="question['+i+']" id="form-stacked-text" type="text" placeholder="Masukan pertanyaan...">'+
                             '</div>'+
                         '</div>'+
                         '<div class="uk-grid-match uk-child-width-1-2@m" uk-grid>'+
                             '<div class="form-grup">'+
                                 '<label class="form-label" for="form-stacked-text">Pilihan 1 :</label>'+
                                 '<div class="uk-form-controls">'+
-                                    '<input class="uk-input" name="addmore['+i+'][choice1]" id="form-stacked-text" type="text" placeholder="Masukan pilihan 1...">'+
+                                    '<input class="uk-input" name="choice1['+i+']" id="form-stacked-text" type="text" placeholder="Masukan pilihan 1...">'+
                                 '</div>'+
                             '</div>'+
                             '<div class="form-grup">'+
                                 '<label class="form-label" for="form-stacked-text">Pilihan 2 :</label>'+
                                 '<div class="uk-form-controls">'+
-                                    '<input class="uk-input" name="addmore['+i+'][choice2]" id="form-stacked-text" type="text" placeholder="Masukan pilihan 2...">'+
+                                    '<input class="uk-input" name="choice2['+i+']" id="form-stacked-text" type="text" placeholder="Masukan pilihan 2...">'+
                                 '</div>'+
                             '</div>'+
                             '<div class="form-grup" style="margin-top: 20px;">'+
                                 '<label class="form-label" for="form-stacked-text">Pilihan 3 :</label>'+
                                 '<div class="uk-form-controls">'+
-                                    '<input class="uk-input" name="addmore['+i+'][choice3]" id="form-stacked-text" type="text" placeholder="Masukan pilihan 3...">'+
+                                    '<input class="uk-input" name="choice3['+i+']" id="form-stacked-text" type="text" placeholder="Masukan pilihan 3...">'+
                                 '</div>'+
                             '</div>'+
                             '<div class="form-grup" style="margin-top: 20px;">'+
                                 '<label class="form-label" for="form-stacked-text">Pilihan 4 :</label>'+
                                 '<div class="uk-form-controls">'+
-                                    '<input class="uk-input" name="addmore['+i+'][choice4]" id="form-stacked-text" type="text" placeholder="Masukan pilihan 4...">'+
+                                    '<input class="uk-input" name="choice4['+i+']" id="form-stacked-text" type="text" placeholder="Masukan pilihan 4...">'+
                                 '</div>'+
                             '</div>'+
                             '<div class="form-grup" style="margin-top: 20px;">'+
                                 '<label class="form-label" for="form-stacked-text">Pilihan Benar :</label>'+
                                 '<div class="uk-form-controls">'+
-                                    '<input class="uk-input" name="addmore['+i+'][answer]" id="form-stacked-text" type="text" placeholder="Masukan no pilihan yang benar...">'+
+                                    '<input class="uk-input" name="answer['+i+']" id="form-stacked-text" type="text" placeholder="Masukan no pilihan yang benar...">'+
                                 '</div>'+
                             '</div>'+
                         '</div>'+

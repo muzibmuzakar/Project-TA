@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Quiz;
+use App\Models\Soal;
 
 class QuizController extends Controller
 {
@@ -39,7 +41,25 @@ class QuizController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $quiz =Quiz :: create([
+            "pelajaran_id" =>$request->pelajaran_id,
+            "materi_id" =>$request->materi_id,
+        ]);
+
+        $jumlah = count($request->question);
+        for ($i =0; $i < $jumlah; $i++){
+            Soal :: create([
+                'quiz_id' => $quiz->id,
+                'question' => $request->question[$i],
+                'choice1' => $request->choice1[$i],
+                'choice2' => $request->choice2[$i],
+                'choice3' => $request->choice3[$i],
+                'choice4' => $request->choice4[$i],
+                'answer' => $request->answer[$i],
+            ]);
+        }
+
+        return redirect()->route('quiz.index');
     }
 
     /**
