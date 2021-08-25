@@ -10,7 +10,7 @@ class Soal extends Model
 {
     use HasFactory;
     protected $fillable =[
-        'quiz_id', 'question', 'choice1', 'choice2', 'choice3', 'choice4', 'answer'
+        'quiz_id', 'question', 'choice1', 'choice2', 'choice3', 'choice4', 'answer', 'materi_id'
     ];
     
     public function quiz(){

@@ -121,18 +121,19 @@
                 <div class="uk-width-1-2@s">
                     <label class="form-label" for="form-stacked-select">Pelajaran</label>
                     <div class="uk-form-controls">
-                        <select class="uk-select" id="form-stacked-select" name="pelajaran_id">
-                            <option value="1">pelajaran 01</option>
-                            <option value="2">pelajaran 02</option>
+                        <select class="uk-select" id="pelajaran" name="pelajaran_id">
+                            <option value="">-- Pilih Pelajaran --</option>
+                            @foreach ($pelajaran as $p)
+                                <option value="{{ $p->id }}">{{ $p->name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
                 <div class="uk-width-1-2@s">
                     <label class="form-label" for="form-stacked-select">Materi</label>
                     <div class="uk-form-controls">
-                        <select class="uk-select" id="form-stacked-select" name="materi_id">
-                            <option value="1">materi 01</option>
-                            <option value="2">materi 02</option>
+                        <select class="uk-select" id="materi" name="materi_id">
+                            <option value="">-- Pilih Materi --</option>
                         </select>
                     </div>
                 </div>
@@ -267,6 +268,20 @@
     $('.soal').on('click', '#remove', function () {
             $(this).parent().remove();
         });
+
+        $(function () {
+            $('#pelajaran').on('change', function () {
+                axios.post('{{ route('materiQuiz') }}', {id: $(this).val()})
+                    .then(function (response) {
+                        $('#materi').empty();
+
+                        $.each(response.data, function (id, judul) {
+                            $('#materi').append(new Option(judul, id))
+                        })
+                    });
+            });
+        });
 </script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 @endsection

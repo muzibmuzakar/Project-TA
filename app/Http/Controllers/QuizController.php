@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Materi;
 use App\Models\Quiz;
 use App\Models\Soal;
+use App\Models\Pelajaran;
 
 class QuizController extends Controller
 {
@@ -29,8 +31,10 @@ class QuizController extends Controller
     public function create()
     {
         $data = ['loggedUserInfo' =>Admin::where('id', '=', session('LoggedUser'))->first()];
+        $pelajaran['pelajaran'] = Pelajaran::get();
+        $materi['materi'] = Materi::get();
 
-        return view('admin.quiz.addQuiz', $data);
+        return view('admin.quiz.addQuiz', $data)->with($pelajaran, $materi);
     }
 
     /**
@@ -50,6 +54,7 @@ class QuizController extends Controller
         for ($i =0; $i < $jumlah; $i++){
             Soal :: create([
                 'quiz_id' => $quiz->id,
+                'materi_id' => $request->materi_id,
                 'question' => $request->question[$i],
                 'choice1' => $request->choice1[$i],
                 'choice2' => $request->choice2[$i],
@@ -105,5 +110,21 @@ class QuizController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function materiQuiz(Request $request)
+    {
+        $materi = Materi::where('id_pelajaran', $request->get('id'))
+            ->pluck('judul', 'id');
+    
+        return response()->json($materi);
+    }
+
+    public function quizJson($id)
+    {
+        $mat = array('materi_id' => $id);
+        $soal['soal'] = Soal::where($mat)->get();
+    
+        return response()->json($soal);
     }
 }

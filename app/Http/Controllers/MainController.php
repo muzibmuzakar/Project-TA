@@ -36,6 +36,13 @@ class MainController extends Controller
         return view('belajar', $data)->with($materi);
     }
 
+    public function belajarQuiz()
+    {
+        $data = ['loginUserInfo' =>User::where('id', '=', session('LoginUser'))->first()];
+        
+        return view('quiz.quiz', $data);
+    }
+
     public function test(){
         $data = ['loginUserInfo' =>User::where('id', '=', session('LoginUser'))->first()];
 

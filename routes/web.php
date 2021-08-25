@@ -26,7 +26,6 @@ use App\Http\Controllers\UserController;
 // frontend Route
 Route::get('/', [MainController::class, 'index'])->name('home');
 Route::get('/test', [MainController::class, 'test'])->name('test');
-
 // auth frontend
 Route::post('/user/save', [UserController::class, 'save'])->name('user.save');
 Route::post('/user/check', [UserController::class, 'check'])->name('user.check');
@@ -36,6 +35,8 @@ Route::group(['middleware'=>['UserAuth']], function(){
     Route::get('/login', [UserController::class, 'signin'])->name('login');
     Route::get('/pelajaranDetail/{id}', [MainController::class, 'pelajaranDetail'])->name('pelajaranDetail');
     Route::get('/belajar/{id}', [MainController::class, 'belajar'])->name('belajar');
+    Route::get('/quizJson/{id}', [QuizController::class, 'quizJson'])->name('quiz.quizJson');
+    Route::get('/belajarQuiz', [MainController::class, 'belajarQuiz'])->name('belajar.quiz');
 });
 
 // auth controller
@@ -59,5 +60,7 @@ Route::group(['middleware'=>['AuthCheck']], function(){
 
     // quiz
     Route::resource('quiz', QuizController::class);
+    // Route::post('materiQuiz', QuizController::class, 'materiQuiz')->name('materiQuiz');
+    Route::post('/materiQuiz', [QuizController::class, 'materiQuiz'])->name('materiQuiz');
 
 });
