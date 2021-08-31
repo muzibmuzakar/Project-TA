@@ -36,11 +36,34 @@ class MainController extends Controller
         return view('belajar', $data)->with($materi);
     }
 
-    public function belajarQuiz()
+    public function belajarQuiz($id)
     {
         $data = ['loginUserInfo' =>User::where('id', '=', session('LoginUser'))->first()];
+
+        $where = array('id' => $id);
+        $materi['materi'] = Materi::where($where)->first();
         
-        return view('quiz.quiz', $data);
+        return view('quiz.quiz', $data)->with($materi);
+    }
+
+    public function game($id)
+    {
+        $data = ['loginUserInfo' =>User::where('id', '=', session('LoginUser'))->first()];
+
+        $where = array('id' => $id);
+        $materi['materi'] = Materi::where($where)->first();
+        
+        return view('quiz.game', $data)->with($materi);
+    }
+
+    public function endQuiz($id)
+    {
+        $data = ['loginUserInfo' =>User::where('id', '=', session('LoginUser'))->first()];
+
+        $where = array('id' => $id);
+        $materi['materi'] = Materi::where($where)->first();
+        
+        return view('quiz.endQuiz', $data)->with($materi);
     }
 
     public function test(){

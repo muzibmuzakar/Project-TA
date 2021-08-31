@@ -36,7 +36,10 @@ Route::group(['middleware'=>['UserAuth']], function(){
     Route::get('/pelajaranDetail/{id}', [MainController::class, 'pelajaranDetail'])->name('pelajaranDetail');
     Route::get('/belajar/{id}', [MainController::class, 'belajar'])->name('belajar');
     Route::get('/quizJson/{id}', [QuizController::class, 'quizJson'])->name('quiz.quizJson');
-    Route::get('/belajarQuiz', [MainController::class, 'belajarQuiz'])->name('belajar.quiz');
+    // quiz
+    Route::get('/belajarQuiz/{id}', [MainController::class, 'belajarQuiz'])->name('belajar.quiz');
+    Route::get('/game/{id}', [MainController::class, 'game'])->name('quiz.game');
+    Route::get('/endQuiz/{id}', [MainController::class, 'endQuiz'])->name('quiz.endQuiz');
 });
 
 // auth controller
