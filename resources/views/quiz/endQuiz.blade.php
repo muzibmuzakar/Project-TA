@@ -12,9 +12,9 @@
                 <h1 id="finalScore"></h1>
                 <form>
                     <h3>Selamat 
-                        <input type="text" name="username" id="username" class="no-border readonly" value="{{ $loginUserInfo['username'] }}"/>, 
+                        <input type="text" name="username" id="username" class="no-border" readonly value="{{ $loginUserInfo['username'] }}"/>, 
                         Kamu telah menyelesaikan Quiz {{ $materi->judul }} dengan skor 
-                        <input type="text" name="username" id="finalScore2" class="no-border readonly" placeholder="username"/>
+                        <input type="text" name="username" id="finalScore2" class="no-border" readonly placeholder="username"/>
                     </h3>
                     {{-- <input type="text" name="username" id="username" value="{{ $loginUserInfo['username'] }}"/>
                     <input type="text" name="username" id="finalScore2" placeholder="username"/> --}}
