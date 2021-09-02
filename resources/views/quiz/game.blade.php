@@ -97,11 +97,11 @@
         }
 
         .correct {
-            background-color: #7DEDFF;
+            background-color: #CAF7E3;
         }
 
         .incorrect {
-            background-color: #FF616D;
+            background-color: #FFAAA7;
         }
 
         /* HUD */
@@ -150,6 +150,17 @@
     </style>
 
     <script>
+      fetch('{{ asset("json/html-1.json") }}')
+        .then((res) => {
+            return res.json();
+        })
+        .then((loadedQuestions) => {
+            questions = loadedQuestions;
+            startGame();
+        })
+        .catch((err) => {
+            console.error(err);
+        });
       getNewQuestion = () => {
       if (availableQuesions.length === 0 || questionCounter >= MAX_QUESTIONS) {
         localStorage.setItem("mostRecentScore", score);

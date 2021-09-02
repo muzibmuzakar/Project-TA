@@ -65,7 +65,7 @@
                     
                     @if ($materi->game)
                     <div uk-lightbox>
-                        <a href="{{ url('http://localhost/'. $materi->game) }}" data-type="iframe">
+                        <a href="{{ url('http://localhost/game-ta/'. $materi->game) }}" data-type="iframe">
                             <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
                                 <div class="icon-box" data-aos="fade-up" data-aos-delay="200">
                                     <div class="icon"><i class="bx bx-joystick-button"></i></div>
