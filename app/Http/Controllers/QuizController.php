@@ -8,6 +8,7 @@ use App\Models\Materi;
 use App\Models\Quiz;
 use App\Models\Soal;
 use App\Models\Pelajaran;
+use Illuminate\Support\Facades\Storage;
 
 class QuizController extends Controller
 {
@@ -51,8 +52,9 @@ class QuizController extends Controller
         ]);
 
         $jumlah = count($request->question);
+        $soals = [];
         for ($i =0; $i < $jumlah; $i++){
-            Soal :: create([
+            $soal= Soal :: create([
                 'quiz_id' => $quiz->id,
                 'materi_id' => $request->materi_id,
                 'question' => $request->question[$i],
@@ -62,8 +64,11 @@ class QuizController extends Controller
                 'choice4' => $request->choice4[$i],
                 'answer' => $request->answer[$i],
             ]);
+            array_push($soals, $soal->toArray());
         }
 
+        $fileName = $soal->materi_id;
+        Storage::disk('public')->put($fileName.'.json', json_encode($soals));
         return redirect()->route('quiz.index');
     }
 

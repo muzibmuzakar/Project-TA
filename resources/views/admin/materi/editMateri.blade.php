@@ -111,7 +111,7 @@
                 </div>
             @endif
             @csrf
-            @method('PUT')
+            @method('PATCH')
             <div class="form-group">
                 <label for="name" class="form-label">Pelajaran :</label>
                 <input type="text" id="name" class="form-control" name="pelajatan" placeholder="Pelajran" value="{{ $materi->id_pelajaran }}">
