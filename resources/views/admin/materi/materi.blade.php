@@ -1,5 +1,6 @@
 @extends('admin.layouts.main')
 @section('content')
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/uikit@3.4.2/dist/css/uikit.min.css'>
 
     <!-- Topbar -->
     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -10,13 +11,12 @@
         </button>
 
         <!-- Topbar Search -->
-        <form
+        <form action="{{ route('materi.index') }}"
             class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                    aria-label="Search" aria-describedby="basic-addon2">
+                <input type="text" class="form-control bg-light border-0 small" value="{{ request('search') }}" placeholder="Search for..." name="search">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
+                    <button class="btn btn-primary" type="submit">
                         <i class="fas fa-search fa-sm"></i>
                     </button>
                 </div>
@@ -92,59 +92,44 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Pelajaran</h1>
-            <a href="{{ route('pelajaran.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-download fa-sm text-white-50"></i> Tambah Pelajaran</a>
+            <h1 class="h3 mb-0 text-gray-800">Materi</h1>
+            <a href="{{ route('materi.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                    class="fas fa-download fa-sm text-white-50"></i> Tambah Materi</a>
         </div>
 
-        <!-- Content Row -->
-        <div class="row center" style="margin-left: 20px">
-
-            <!-- Earnings (Monthly) Card Example -->
-            @foreach ($pelajaran as $p)
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="a-box">
-                    <div class="img-container">
-                        <div class="img-inner">
-                            <div class="inner-skew">
-                                @if($p->image)
-                                    <img src="{{ url('/image/'.$p->image) }}" />
-                                @else
-                                    <img src="{{ asset('img/default-06.png')}}" />
-                                @endif
-                            </div>
+        <div class="row">
+            @foreach ($materi as $m)
+            <div class="col-md-4 mb-3">
+                <div>
+                    <div class="uk-card uk-card-default">
+                        <div class="uk-card-media-top">
+                            <img src="{{ asset('slide/html-1_s1.png') }}" alt="">
                         </div>
-                    </div>
-                    <div class="text-container">
-                        <a href="{{ route('pelajaran.show',$p->id) }}" style="text-decoration: none"><h3>{{ $p->name }}</h3></a>
-                        <div class="text-truncate">
-                            {{ $p->detail }}
+                        <div class="uk-card-body">
+                            <h3 class="uk-card-title">{{ $m->judul }}</h3>
+                            <p class="text-truncate">{{ $m->detail }}</p>
                         </div>
-                        
-                    <div class="dropdown">
-                        <a class="btn-dropdown" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-angle-down"></i>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="{{ route('pelajaran.show',$p->id) }}"><i class="far fa-eye"></i> Lihat Materi</a></li>
-                            <li><a class="dropdown-item" href="{{ route('pelajaran.edit',$p->id) }}"><i class="far fa-edit"></i> Ubah</a></li>
-                            <li>
-                                <form action="{{ route('pelajaran.destroy',$p->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="dropdown-item" ><i class="far fa-trash-alt"></i> Hapus</button>
-                                </form>
-                                
-                            </li>
-                        </ul>
-                    </div>
+                        <div class="dropdown">
+                            <a class="btn-dropdown" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="{{ route('materi.show',$m->id) }}"><i class="far fa-eye"></i> Lihat Materi</a></li>
+                                <li><a class="dropdown-item" href="{{ route('materi.edit',$m->id) }}"><i class="far fa-edit"></i> Ubah</a></li>
+                                <li>
+                                    <form action="{{ route('materi.destroy',$m->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="dropdown-item" ><i class="far fa-trash-alt"></i> Hapus</button>
+                                    </form>
+                                    
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-                
+            </div>    
             @endforeach
-
-            
         </div>
     </div>
     <!-- /.container-fluid -->
@@ -168,54 +153,8 @@
             </div>
         </div>
     </div>
-    @include('sweetalert::alert')
+
     <style>
-        .a-box {
-            display: inline-block;
-            width: 240px;
-            text-align: center;
-        }
-        
-        .img-container {
-            height: 230px;
-            width: 200px;
-            overflow: hidden;
-            border-radius: 0px 0px 20px 20px;
-            display: inline-block;
-        }
-        
-        .img-container img {
-            height: 100%;
-            margin: -20px 0px 0px -25px;
-        }
-        
-        .inner-skew {
-            display: inline-block;
-            border-radius: 20px;
-            overflow: hidden;
-            padding: 0px;
-            font-size: 0px;
-            margin: 30px 0px 0px 0px;
-            background: #c8c2c2;
-            height: 250px;
-            width: 200px;
-        }
-        
-        .text-container {
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
-            padding: 120px 20px 20px 20px;
-            border-radius: 20px;
-            background: #fff;
-            margin: -120px 0px 0px 0px;
-            line-height: 19px;
-            font-size: 14px;
-        }
-        
-        .text-container h3 {
-            margin: 20px 0px 10px 0px;
-            color: #4e73df;
-            font-size: 18px;
-        }
         /* css dropdown */
         .dropdown-menu{
             border-radius: 15px;
@@ -223,11 +162,12 @@
         }
 
         .btn-dropdown{
-            top: -100px;
-            margin-left: 180px;
-            font-size: 20px;
+            margin-left: 300px;
+            font-size: 25px;
             text-decoration: none;
             color: black;
         }
     </style>
+
+    @include('sweetalert::alert')
 @endsection

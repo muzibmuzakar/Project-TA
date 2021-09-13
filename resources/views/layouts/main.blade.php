@@ -50,7 +50,6 @@
           <li><a href="/">Home</a></li>
           <li><a href="/#pelajaran">Pelajaran</a></li>
           <li><a href="/#about">About</a></li>
-          <li><a href="{{ route('test') }}">test</a></li>
           @if(session()->has('LoginUser'))
           <li class="drop-down">
             <a href="#"><img class="img-profile rounded-circle" style="width: 35px; margin-top:-10px;" src="{{ asset('img/undraw_profile.svg')}}"></a>

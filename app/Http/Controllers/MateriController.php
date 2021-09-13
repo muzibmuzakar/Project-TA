@@ -18,7 +18,14 @@ class MateriController extends Controller
      */
     public function index()
     {
-        
+        $data = ['loggedUserInfo' =>Admin::where('id', '=', session('LoggedUser'))->first()];
+        $materi = Materi::latest();
+
+        if(request('search')) {
+            $materi->where('judul', 'like', '%' . request('search') . '%');
+        }
+
+        return view('admin.materi.materi', $data,['materi' => $materi->get()]);
     }
 
     /**
@@ -28,7 +35,10 @@ class MateriController extends Controller
      */
     public function create()
     {
-        //
+        $data = ['loggedUserInfo' =>Admin::where('id', '=', session('LoggedUser'))->first()];
+        $pelajaran = Pelajaran::all();
+
+        return view('admin.materi.addMateri', $data, ['pelajaran' => $pelajaran]);
     }
 
     /**
@@ -60,8 +70,8 @@ class MateriController extends Controller
             }
         }
 
-        return redirect()->route('pelajaran.index')
-                        ->with('success','Pelajaran created successfully.');
+        return redirect()->route('materi.index')
+                        ->with('toast_success','Materi berhasil di tambahkan.');
     }
 
     /**
@@ -118,7 +128,7 @@ class MateriController extends Controller
 
             }
         }
-        return redirect()->route('pelajaran.index')->with('success','Pelajaran created successfully.');
+        return redirect()->route('pelajaran.index')->with('toast_success', 'Materi berhasil di update');
     }
 
     /**
@@ -138,7 +148,7 @@ class MateriController extends Controller
             }
         }
         $posts->delete();
-        return back();
+        return back()->with('toast_warning', 'Materi berhasil dihapus');
     }
 
     public function addMateri($id_pelajaran)

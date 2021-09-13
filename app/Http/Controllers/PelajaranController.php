@@ -61,7 +61,7 @@ class PelajaranController extends Controller
         Pelajaran::create($input);
      
         return redirect()->route('pelajaran.index')
-                        ->with('success','Pelajaran created successfully.');
+                        ->with('toast_success','Pelajaran berhasil ditambahkan');
     }
 
     /**
@@ -127,7 +127,7 @@ class PelajaranController extends Controller
         Pelajaran::where('id',$id)->update($input);
     
         return redirect()->route('pelajaran.index')
-                        ->with('success','Pelajaran updated successfully');
+        ->with('toast_success', 'Pelajaran berhasil di update');
     }
 
     /**
@@ -140,6 +140,6 @@ class PelajaranController extends Controller
     {
         Pelajaran::where('id',$id)->delete();
         return redirect()->route('pelajaran.index')
-                        ->with('success','Pelajaran deleted successfully');
+                        ->with('toast_success','Pelajaran berhasil dihapus');
     }
 }

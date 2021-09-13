@@ -114,7 +114,9 @@
             <div class="form-group">
                 <label for="name" class="form-label">Pelajaran :</label>
                 <select name="id_pelajaran" class="form-select form-control" aria-label="Default select example">
-                    <option name="id_pelajaran" value="{{ $pelajaran->id }}">{{ $pelajaran->name }}</option>
+                    @foreach ($pelajaran as $p)
+                        <option value="{{ $p->id }}">{{ $p->name }}</option>
+                    @endforeach
                 </select>
                 {{-- <input type="text" id="name" class="form-control" name="name" placeholder="{{ $pelajaran->name }}" value="{{ $pelajaran->id }}" disabled> --}}
                 <span class="text-danger">@error('name'){{ $message }}@enderror</span>

@@ -162,9 +162,21 @@
       let availableQuesions = [];
 
       let questions = [];
+      var myInit = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        cache: 'default',
+      };
 
-      fetch("{{ asset('js/html.json') }}")
+      let myRequest = new Request("js/html.json", myInit);
+      fetch(myRequest)
         .then((res) => {
+          if (!res.ok){
+            throw Error(res.statusText + " - " + res.url);
+          }
             return res.json();
         })
         .then((loadedQuestions) => {

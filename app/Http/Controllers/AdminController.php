@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Pelajaran;
+use App\Models\Materi;
+use App\Models\Quiz;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -70,6 +74,14 @@ class AdminController extends Controller
     public function index()
     {
         $data = ['loggedUserInfo' =>Admin::where('id', '=', session('LoggedUser'))->first()];
-        return view('admin.dashboard', $data);
+        $pelajaran = Pelajaran::all()->count();
+        $materi = materi::all()->count();
+        $quiz = quiz::all()->count();
+        $user = user::all()->count();
+
+        return view('admin.dashboard', $data, ['pelajaran' => $pelajaran])
+        ->with(['materi' => $materi])
+        ->with(['quiz' => $quiz])
+        ->with(['user' => $user]);
     }
 }

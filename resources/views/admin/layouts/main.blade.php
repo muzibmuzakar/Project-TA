@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Backend</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -59,13 +59,19 @@
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('pelajaran.index') }}">
-                    <i class="fas fa-fw fa-atlas"></i>
+                    <i class="fas fa-fw fa-book"></i>
                     <span>Pelajaran</span></a>
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="{{ route('materi.index') }}">
+                    <i class="fas fa-fw fa-book-open"></i>
+                    <span>Materi</span></a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('quiz.index') }}">
-                    <i class="fas fa-fw fa-atlas"></i>
+                    <i class="fas fa-fw fa-clipboard-list"></i>
                     <span>Quiz</span></a>
             </li>
 
