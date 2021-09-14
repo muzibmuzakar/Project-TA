@@ -162,24 +162,12 @@
       let availableQuesions = [];
 
       let questions = [];
-      var myInit = {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        mode: 'cors',
-        cache: 'default',
-      };
-
-      let myRequest = new Request("js/html.json", myInit);
-      fetch(myRequest)
+      fetch("{{ asset('storage/'.$materi->id.'.json') }}")
         .then((res) => {
-          if (!res.ok){
-            throw Error(res.statusText + " - " + res.url);
-          }
             return res.json();
         })
         .then((loadedQuestions) => {
+            console.log(loadedQuestions);
             questions = loadedQuestions;
             startGame();
         })
@@ -189,7 +177,7 @@
 
       //CONSTANTS
       const CORRECT_BONUS = 10;
-      const MAX_QUESTIONS = 3;
+      const MAX_QUESTIONS = 5;
 
       startGame = () => {
         questionCounter = 0;
@@ -202,7 +190,7 @@
         if (availableQuesions.length === 0 || questionCounter >= MAX_QUESTIONS) {
           localStorage.setItem("mostRecentScore", score);
           //go to the end page
-          return window.location.assign("/end.html");
+          return window.location.assign("{{ route('quiz.endQuiz',$materi->id) }}");
         }
         questionCounter++;
         progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
@@ -251,9 +239,8 @@
         scoreText.innerText = score;
       };
 
-      startGame();
+      // startGame();
 
     </script>
-    {{-- <script src="{{ asset('assets-frontend/js/quiz.js') }}"></script> --}}
 
 @endsection

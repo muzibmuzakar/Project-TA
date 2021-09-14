@@ -7,6 +7,7 @@ use App\Http\Controllers\MateriController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\QuizController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GameController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,9 @@ Route::group(['middleware'=>['UserAuth']], function(){
     Route::get('/belajarQuiz/{id}', [MainController::class, 'belajarQuiz'])->name('belajar.quiz');
     Route::get('/game/{id}', [MainController::class, 'game'])->name('quiz.game');
     Route::get('/endQuiz/{id}', [MainController::class, 'endQuiz'])->name('quiz.endQuiz');
+
+    Route::get('game/html/{id}', [GameController::class, 'html1'])->name('game.html1');
+    Route::get('game/html1/lvl1/{id}', [GameController::class, 'html1_lvl1'])->name('game.html1.lvl1');
 });
 
 // auth controller
