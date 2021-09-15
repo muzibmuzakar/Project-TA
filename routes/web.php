@@ -44,6 +44,8 @@ Route::group(['middleware'=>['UserAuth']], function(){
 
     Route::get('game/html/{id}', [GameController::class, 'html1'])->name('game.html1');
     Route::get('game/html1/lvl1/{id}', [GameController::class, 'html1_lvl1'])->name('game.html1.lvl1');
+    Route::get('game/html1/lvl2/{id}', [GameController::class, 'html1_lvl2'])->name('game.html1.lvl2');
+    Route::get('game/html1/lvl3/{id}', [GameController::class, 'html1_lvl3'])->name('game.html1.lvl3');
 });
 
 // auth controller

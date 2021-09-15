@@ -117,9 +117,9 @@
                 </div>
             @endif
             @csrf
-            <div uk-grid>
+            <div uk-grid class="mb-3">
                 <div class="uk-width-1-2@s">
-                    <label class="form-label" for="form-stacked-select">Pelajaran</label>
+                    <label class="form-label" for="form-stacked-select">Pelajaran :</label>
                     <div class="uk-form-controls">
                         <select class="uk-select" id="pelajaran" name="pelajaran_id">
                             <option value="">-- Pilih Pelajaran --</option>
@@ -130,12 +130,18 @@
                     </div>
                 </div>
                 <div class="uk-width-1-2@s">
-                    <label class="form-label" for="form-stacked-select">Materi</label>
+                    <label class="form-label" for="form-stacked-select">Materi :</label>
                     <div class="uk-form-controls">
                         <select class="uk-select" id="materi" name="materi_id">
                             <option value="">-- Pilih Materi --</option>
                         </select>
                     </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="form-stacked-text">Judul :</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" name="judul" id="form-stacked-text" type="text">
                 </div>
             </div>
             <h1 class="h4 mb-0 text-gray-800">Soal</h1>

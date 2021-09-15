@@ -20,8 +20,9 @@ class QuizController extends Controller
     public function index()
     {
         $data = ['loggedUserInfo' =>Admin::where('id', '=', session('LoggedUser'))->first()];
+        $quiz = Quiz::latest()->paginate(5);
 
-        return view('admin.quiz.quiz', $data);
+        return view('admin.quiz.quiz', $data, ['quiz' => $quiz]);
     }
 
     /**
@@ -47,6 +48,7 @@ class QuizController extends Controller
     public function store(Request $request)
     {
         $quiz =Quiz :: create([
+            "judul" => $request->judul,
             "pelajaran_id" =>$request->pelajaran_id,
             "materi_id" =>$request->materi_id,
         ]);

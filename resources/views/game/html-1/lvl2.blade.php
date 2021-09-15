@@ -9,9 +9,9 @@
     <section id="game">
         <div class="row">
             <div class="col-md-6">
-                <img src="{{ asset('img/char.png') }}" class="uk-position-small uk-position-bottom-left uk-overlay uk-overlay-default" alt="">
-                <h4 class="text-center" style="top:0;">Susun Tag HTML dibawah ini agar menjadi struktur HTML yang benar .</h4>
-                <div class="uk-flex uk-flex-center">
+                <img src="{{ asset('img/char.png') }}" class="uk-position-small uk-position-bottom-left" alt="">
+                <h4 class="text-center" style="top:0;">Susun code dibawah ini ke box editor untuk dapat menampilkan judul pada tab seperti pada gambar dibawah ini</h4>
+                <div class="uk-flex uk-flex-center" style="margin-bottom: -10px;">
                     <div class="dragAndDrop" ondrop="drop001(event)">
                         <div ondragstart="dragStart001(event)" draggable="true" id="target001"><p class="choice">&lt;html&gt;</p></div>
                     </div>
@@ -27,9 +27,23 @@
                     <div class="dragAndDrop" ondrop="drop005(event)">
                         <div ondragstart="dragStart005(event)" draggable="true" id="target005"><p class="choice">&lt;/body&gt;</p></div>
                     </div>
+                </div>
+                <div class="uk-flex uk-flex-center">
                     <div class="dragAndDrop" ondrop="drop006(event)">
                         <div ondragstart="dragStart006(event)" draggable="true" id="target006"><p class="choice">&lt;/html&gt;</p></div>
                     </div>
+                    <div class="dragAndDrop" ondrop="drop007(event)">
+                        <div ondragstart="dragStart007(event)" draggable="true" id="target007"><p class="choice">&lt;title&gt;</p></div>
+                    </div>
+                    <div class="dragAndDrop" ondrop="drop008(event)">
+                        <div ondragstart="dragStart008(event)" draggable="true" id="target008"><p class="choice">My App</p></div>
+                    </div>
+                    <div class="dragAndDrop" ondrop="drop009(event)">
+                        <div ondragstart="dragStart009(event)" draggable="true" id="target009"><p class="choice">&lt;/title&gt;</p></div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <img src="{{ asset('img/soal 3-05.png') }}" alt="">
                 </div>
             </div>
             <div class="col-md-6">
@@ -37,6 +51,9 @@
                 background-size: 100%;">
                     <input class="box001" ondrop="put001(event)" ondragover="allowDrop001(event)" id="place001" readonly><br>
                     <input class="box002" ondrop="put002(event)" ondragover="allowDrop002(event)" id="place002" readonly><br>
+                    <input class="box007" ondrop="put007(event)" ondragover="allowDrop007(event)" id="place007" readonly>
+                    <input class="box008" ondrop="put008(event)" ondragover="allowDrop008(event)" id="place008" readonly>
+                    <input class="box009" ondrop="put009(event)" ondragover="allowDrop009(event)" id="place009" readonly><br>
                     <input class="box003" ondrop="put003(event)" ondragover="allowDrop003(event)" id="place003" readonly><br>
                     <input class="box004" ondrop="put004(event)" ondragover="allowDrop004(event)" id="place004" readonly><br>
                     <input class="box005" ondrop="put005(event)" ondragover="allowDrop005(event)" id="place005" readonly><br>
@@ -123,6 +140,33 @@
             color: #e06c75;
             border: dashed slategrey 1px;
         }
+        .box007{
+            margin: 10px 0 0 70px;
+            background: transparent;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            color: #e06c75;
+            border: dashed slategrey 1px;
+            width: 150px;
+        }
+        .box008{
+            margin: 10px 0 0 5px;
+            background: transparent;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            color: #e06c75;
+            border: dashed slategrey 1px;
+            width: 150px;
+        }
+        .box009{
+            margin: 10px 0 0 5px;
+            background: transparent;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            color: #e06c75;
+            border: dashed slategrey 1px;
+            width: 150px;
+        }
         #pertanyaan{
             margin-top: 50px;
         }
@@ -161,6 +205,18 @@
             function dragStart006(event) {
                 event.dataTransfer.setData("choice006", event.target.id);
             }
+
+            function dragStart007(event) {
+                event.dataTransfer.setData("choice007", event.target.id);
+            }
+
+            function dragStart008(event) {
+                event.dataTransfer.setData("choice008", event.target.id);
+            }
+
+            function dragStart009(event) {
+                event.dataTransfer.setData("choice009", event.target.id);
+            }
             
             function allowDrop001(event) {
                 event.preventDefault();
@@ -183,6 +239,18 @@
             }
             
             function allowDrop006(event) {
+                event.preventDefault();
+            }
+            
+            function allowDrop007(event) {
+                event.preventDefault();
+            }
+            
+            function allowDrop008(event) {
+                event.preventDefault();
+            }
+            
+            function allowDrop009(event) {
                 event.preventDefault();
             }
             
@@ -228,6 +296,27 @@
                     place006.value = "</html>";
             }
             
+            function put007(event) {
+                var data = event.dataTransfer.getData("choice007");
+                event.target.appendChild(document.getElementById(data));
+            score001.innerHTML = b++;
+                    place007.value = "<title>";
+            }
+            
+            function put008(event) {
+                var data = event.dataTransfer.getData("choice008");
+                event.target.appendChild(document.getElementById(data));
+            score001.innerHTML = b++;
+                    place008.value = "My App";
+            }
+            
+            function put009(event) {
+                var data = event.dataTransfer.getData("choice009");
+                event.target.appendChild(document.getElementById(data));
+            score001.innerHTML = b++;
+                    place009.value = "</title>";
+            }
+            
             function drop001(event) {
                 event.preventDefault();
             }
@@ -253,10 +342,22 @@
                 event.preventDefault();
             }
             
+            function drop007(event) {
+                event.preventDefault();
+            }
+            
+            function drop008(event) {
+                event.preventDefault();
+            }
+            
+            function drop009(event) {
+                event.preventDefault();
+            }
+            
             
             function submit001() {
-                if (b > 6) {
-                    nxt.innerHTML = "<a href='{{ route('game.html1.lvl2',$materi->id) }}' style='margin-left:20px;' class='uk-button uk-button-danger btn-next'>Next</a>";
+                if (b > 8) {
+                    nxt.innerHTML = "<a href='{{ route('game.html1.lvl3',$materi->id) }}' style='margin-left:20px;' class='uk-button uk-button-danger btn-next'>Next</a>";
                     alert('Jawaban Benar, Kamu Bisa lanjut ke tantangan berikutnya !');
                 }
                 else{

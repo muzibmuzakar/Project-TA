@@ -25,4 +25,22 @@ class GameController extends Controller
         
         return view('game.html-1.lvl1', $data)->with($materi);
     }
+
+    public function html1_lvl2($id){
+        $data = ['loginUserInfo' =>User::where('id', '=', session('LoginUser'))->first()];
+
+        $where = array('id' => $id);
+        $materi['materi'] = Materi::where($where)->first();
+        
+        return view('game.html-1.lvl2', $data)->with($materi);
+    }
+    
+    public function html1_lvl3($id){
+        $data = ['loginUserInfo' =>User::where('id', '=', session('LoginUser'))->first()];
+
+        $where = array('id' => $id);
+        $materi['materi'] = Materi::where($where)->first();
+        
+        return view('game.html-1.lvl3', $data)->with($materi);
+    }
 }

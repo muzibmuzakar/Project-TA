@@ -9,7 +9,7 @@
     <section id="quiz">
       <div class="container">
         <div class="section-title">
-          <h2>Game {{ $materi->judul }}</h2>
+          <p class="title">Game {{ $materi->judul }}</p>
           <h3 class="text-center"></h3>
 
           <a class="btn btn-outline-primary" href="{{ route('game.html1.lvl1',$materi->id) }}">Mulai</a>
@@ -18,4 +18,9 @@
     </section>
     <!-- End Quis Section -->
 
+    <style>
+      .title{
+        font-size: 50px;
+      }
+    </style>
 @endsection

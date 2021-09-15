@@ -98,6 +98,38 @@
         </div>
 
         <!-- Content Row -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Daftar Quiz</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Judul</th>
+                                <th>Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @php $no = 1; @endphp
+                            @foreach ($quiz as $q)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $q->judul }}</td>
+                                <td>
+                                    <button class="btn btn-outline-primary btn-sm"><i class="far fa-eye"></i></button>
+                                    <button class="btn btn-outline-warning btn-sm"><i class="fas fa-pen"></i></button>
+                                    <button class="btn btn-outline-danger btn-sm"><i class="far fa-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
         
     </div>
     <!-- /.container-fluid -->
